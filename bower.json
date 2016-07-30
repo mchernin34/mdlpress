@@ -1,0 +1,20 @@
+{
+  "name": "mdlpress",
+  "description": "Material Design Lite WordPress theme",
+  "main": "",
+  "authors": [
+    "Michael Chernin"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "material-design-lite": "^1.1.3"
+  }
+}
