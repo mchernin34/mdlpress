@@ -21,30 +21,52 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
+<div id="page" class="site mdl-layout mdl-js-layout">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'mdlpress' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<?php
-			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-			endif;
+	<header id="masthead" class="site-header mdl-layout__header" role="banner">
+    <div class="mdl-layout__header-row">
+  		<div class="site-branding">
+  			<?php
+  			if ( is_front_page() && is_home() ) : ?>
+  				<h1 class="site-title mdl-layout-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+  			<?php else : ?>
+  				<span class="site-title mdl-layout-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
+  			<?php endif; ?>
+  		</div><!-- .site-branding -->
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
-			endif; ?>
-		</div><!-- .site-branding -->
+      <div class="mdl-layout-spacer"></div>
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'mdlpress' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
+        <?php
+          $args = array(
+                'theme_location' => 'primary',
+                'container'       => 'nav',
+                'items_wrap' => '%3$s',
+                'container_class' => 'mdl-navigation mdl-layout--large-screen-only',
+                'walker' => new MDLWP_Nav_Walker()
+          );
+          if (has_nav_menu('primary')) {
+             wp_nav_menu($args);
+          }
+        ?>
+    </div>
 	</header><!-- #masthead -->
 
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title"><?php bloginfo( 'name' ); ?></span>
+    <?php
+      $args = array(
+            'theme_location' => 'drawer',
+            'container'       => 'nav',
+            'items_wrap' => '%3$s',
+            'container_class' => 'mdl-navigation',
+            'walker' => new MDLWP_Nav_Walker()
+      );
+      if (has_nav_menu('drawer')) {
+         wp_nav_menu($args);
+      }
+    ?>
+  </div>
+
+  <main class="mdl-layout__content">
 	<div id="content" class="site-content">
