@@ -31,3 +31,18 @@
 	clear: both;
 	margin: 0 0 1.5em;
 }
+
+.nav-links a {
+  @extend .mdl-button;
+  @extend .mdl-js-button !optional;
+  @extend .mdl-button--fab;
+  @extend .mdl-button--colored;
+}
+
+.nav-previous {
+  float: right;
+}
+
+.nav-next {
+  float: left;
+}

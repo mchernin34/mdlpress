@@ -32,7 +32,10 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
+	    the_posts_navigation( array(
+        'prev_text' => '<i class="material-icons">arrow_forward</i>',
+        'next_text' => '<i class="material-icons">arrow_back</i>') 
+      );
 
 		else :
 
